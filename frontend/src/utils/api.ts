@@ -2,7 +2,10 @@
 // Random Forest + Extra Trees ensemble (AUC 0.854, threshold 0.4).
 // See backend/app.py for the source of truth on these shapes.
 
-export const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000";
+// Routes live under /api/* (see backend/app.py). Default assumes the Flask
+// dev server is running standalone on :5000; in the merged single-project
+// deployment VITE_API_BASE_URL is set to "/api" (same origin, no CORS).
+export const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000/api";
 
 export interface BackendVillage {
   Village_Name: string;

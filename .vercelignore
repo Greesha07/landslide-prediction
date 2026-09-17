@@ -1,0 +1,12 @@
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+frontend/.env.local
+node_modules
+__pycache__
+*.pyc
+.venv
+venv
+.git

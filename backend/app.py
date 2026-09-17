@@ -14,10 +14,14 @@ UPDATED to use the TRUE_FINAL 11-feature model (AUC 0.854, threshold
 Rainfall_7Day_Cumulative_mm (antecedent rainfall), alongside the
 original 8 terrain/rainfall features.
 
+Routes are under /api/* so this file can be deployed alongside the
+frontend build in a single Vercel project, with /api/* routed here and
+everything else served as static frontend files.
+
 ENDPOINTS:
-  GET  /                          - health check
-  GET  /villages                  - list all village names (for dropdown)
-  POST /predict                   - predict risk for a village
+  GET  /api                       - health check
+  GET  /api/villages               - list all village names (for dropdown)
+  POST /api/predict                - predict risk for a village
        Body: {"village_name": "Irshalwadi"}
        Or:   {"village_name": "Irshalwadi", "rainfall_override_mm": 3500}
        Or:   {"latitude": 18.93, "longitude": 73.23, "elevation_m": 419,
@@ -30,7 +34,7 @@ RUN LOCALLY:
   pip install flask flask-cors pandas scikit-learn requests
   python app.py
   Then open http://127.0.0.1:5000 in a browser, or point your
-  dashboard's fetch() calls at http://127.0.0.1:5000/predict
+  dashboard's fetch() calls at http://127.0.0.1:5000/api/predict
 =====================================================================
 """
 import pickle
@@ -167,18 +171,19 @@ def run_prediction(feature_row):
     }
 
 
-@app.route("/")
+@app.route("/api")
+@app.route("/api/")
 def health_check():
     return jsonify({
         "status": "running",
         "message": "Landslide Prediction API is live.",
         "villages_loaded": len(village_df),
         "model_auc": model_bundle.get("auc"),
-        "endpoints": ["/villages", "/predict"]
+        "endpoints": ["/api/villages", "/api/predict"]
     })
 
 
-@app.route("/villages")
+@app.route("/api/villages")
 def list_villages():
     """Returns all village names + coordinates for the dashboard's
     map markers and search dropdown."""
@@ -190,7 +195,7 @@ def list_villages():
     return jsonify(result)
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/api/predict", methods=["POST"])
 def predict():
     data = request.get_json()
 
