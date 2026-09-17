@@ -1,0 +1,11 @@
+{
+  "title": "Sahyadri Sentinel",
+  "description": "Access real-time risk assessments for villages in Raigad/Satara with interactive maps, live predictions, and personalized alerts to enhance safety.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

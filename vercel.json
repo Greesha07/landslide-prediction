@@ -1,0 +1,12 @@
+{
+  "builds": [
+    {
+      "src": "backend/app.py",
+      "use": "@vercel/python",
+      "config": { "includeFiles": ["model/**", "data/**"] }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "backend/app.py" }
+  ]
+}

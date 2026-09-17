@@ -1,0 +1,36 @@
+# Secrets / environment
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.Python
+*.log
+
+# Node / frontend build
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Vercel
+.vercel/
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Scratch / test files
+scratch/
+*.scratch.*
+tmp/
